@@ -48,3 +48,40 @@ BibliotecaDigital/
 │
 └── backend/
     └── Java + Spring Boot
+```
+
+## Entrega NoSQL (MongoDB)
+
+A entrega NoSQL utiliza as entidades `Livro` e `Autor` da fase 1 e
+contém exemplos de consultas realizadas no MongoDB Atlas.
+
+O arquivo [`mongo/consultas.js`](mongo/consultas.js) contém as consultas
+solicitadas na atividade, incluindo `insertOne`, `insertMany`, `find`,
+`updateOne`, `deleteOne` e os operadores:
+
+- `$eq`
+- `$ne`
+- `$gt`
+- `$gte`
+- `$lt`
+- `$lte`
+- `$in`
+- `$nin`
+- `$or`
+- `$and`
+- `$exists`
+
+Os operadores estão distribuídos entre as entidades `Livro` e `Autor`,
+conforme permitido pelo enunciado da atividade. Algumas consultas
+utilizam mais de um operador, como `$gt` e `$lt`, para representar
+intervalos de valores.
+
+### Execução
+
+As consultas são executadas no MongoDB Atlas utilizando o MongoDB Shell
+(`mongosh`).
+
+Conecte-se ao cluster Atlas e execute o arquivo:
+
+```powershell
+mongosh "mongodb+srv://cluster0.lposwj1.mongodb.net/" --apiVersion 1 --username usuariosDB ".\mongo\consultas.js"
