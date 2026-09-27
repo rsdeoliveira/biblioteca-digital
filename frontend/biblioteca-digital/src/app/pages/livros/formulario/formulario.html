@@ -1,0 +1,47 @@
+﻿<h1>
+  {{ modoEdicao ? 'Atualizar Livro' : 'Cadastrar Livro' }}
+</h1>
+
+<form (ngSubmit)="cadastrar()">
+
+  <div>
+    <label for="titulo">Título:</label>
+    <input
+      id="titulo"
+      type="text"
+      name="titulo"
+      [(ngModel)]="livro.titulo">
+  </div>
+
+  <div>
+    <label for="autor">Autor:</label>
+    <input
+      id="autor"
+      type="text"
+      name="autor"
+      [(ngModel)]="livro.autor">
+  </div>
+
+  <div>
+    <label for="anoPublicacao">Ano de publicação:</label>
+    <input
+      id="anoPublicacao"
+      type="number"
+      name="anoPublicacao"
+      [(ngModel)]="livro.anoPublicacao">
+  </div>
+
+  <div>
+    <label for="isbn">ISBN:</label>
+    <input
+      id="isbn"
+      type="text"
+      name="isbn"
+      [(ngModel)]="livro.isbn">
+  </div>
+
+  <button type="submit">
+    {{ modoEdicao ? 'Atualizar' : 'Cadastrar' }}
+  </button>
+
+</form>
