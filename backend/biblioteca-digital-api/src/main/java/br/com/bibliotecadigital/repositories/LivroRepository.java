@@ -9,6 +9,7 @@ import java.util.List;
 public class LivroRepository {
 
     private final List<Livro> livros = new ArrayList<>();
+    private Long proximoId = 1L;
 
     public List<Livro> listarTodos() {
         return livros;
@@ -22,6 +23,7 @@ public class LivroRepository {
     }
 
     public Livro salvar(Livro livro) {
+        livro.setId(proximoId++);
         livros.add(livro);
         return livro;
     }
