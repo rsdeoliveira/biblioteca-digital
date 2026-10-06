@@ -76,6 +76,11 @@ conforme permitido pelo enunciado da atividade. Algumas consultas
 utilizam mais de um operador, como `$gt` e `$lt`, para representar
 intervalos de valores.
 
+### Simulação de Conflito
+
+Esta seção foi adicionada pelo desenvolvedor A durante a atividade de simulação de conflito no Git.
+
+
 ### Execução
 
 As consultas são executadas no MongoDB Atlas utilizando o MongoDB Shell
