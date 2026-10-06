@@ -76,9 +76,6 @@ conforme permitido pelo enunciado da atividade. Algumas consultas
 utilizam mais de um operador, como `$gt` e `$lt`, para representar
 intervalos de valores.
 
-### Simulação de Conflito
-
-Esta seção documenta a simulação de um conflito entre dois desenvolvedores durante a utilização do Git.
 
 ### Execução
 
@@ -87,5 +84,54 @@ As consultas são executadas no MongoDB Atlas utilizando o MongoDB Shell
 
 Conecte-se ao cluster Atlas e execute o arquivo:
 
-```powershell
+powershell
 mongosh "mongodb+srv://cluster0.lposwj1.mongodb.net/" --apiVersion 1 --username usuariosDB ".\mongo\consultas.js"
+
+## Simulação de Conflito e Resolução no Git
+
+### Objetivo
+
+Simular um conflito entre duas branches durante o desenvolvimento
+e demonstrar o processo de identificação e resolução utilizando o Git.
+
+### Branches utilizadas
+
+- `main`
+- `desenvolvedor-a`
+- `desenvolvedor-b`
+
+### Conflito
+
+As branches `desenvolvedor-a` e `desenvolvedor-b` realizaram alterações
+diferentes no mesmo trecho do arquivo `README.md`.
+
+Ao tentar integrar a branch `desenvolvedor-b` à `main`, o Git identificou
+um conflito de conteúdo.
+
+### Resolução
+
+O conflito foi analisado e resolvido manualmente no arquivo `README.md`.
+Após a resolução, o arquivo foi adicionado ao staging e o merge foi
+finalizado com um commit.
+
+### Comandos utilizados
+
+bash
+git checkout -b desenvolvedor-a
+git checkout -b desenvolvedor-b
+git merge desenvolvedor-a
+git merge desenvolvedor-b
+git status
+git add README.md
+git commit -m "Resolve conflito entre desenvolvedor A e B"
+
+### Resultado
+
+O conflito foi resolvido com sucesso e as alterações das duas branches
+foram integradas à `main`.
+
+### Conclusão
+
+A atividade demonstrou na prática como o Git identifica conflitos
+quando diferentes branches modificam a mesma parte de um arquivo,
+bem como o processo de resolução e finalização do merge.
