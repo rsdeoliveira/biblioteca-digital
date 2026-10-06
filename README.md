@@ -78,8 +78,7 @@ intervalos de valores.
 
 ### Simulação de Conflito
 
-Esta seção foi adicionada pelo desenvolvedor A durante a atividade de simulação de conflito no Git.
-
+Esta seção documenta a simulação de um conflito entre dois desenvolvedores durante a utilização do Git.
 
 ### Execução
 
