@@ -46,7 +46,7 @@ export class Formulario implements OnInit {
     id: '',
     titulo: '',
     autor: '',
-    anoPublicacao: 0,
+    anoPublicacao: null,
     isbn: ''
   };
 

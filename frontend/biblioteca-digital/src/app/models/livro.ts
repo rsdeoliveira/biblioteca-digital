@@ -3,6 +3,6 @@ export interface Livro {
   id: string;
   titulo: string;
   autor: string;
-  anoPublicacao: number;
+  anoPublicacao: number | null;
   isbn: string;
 }
