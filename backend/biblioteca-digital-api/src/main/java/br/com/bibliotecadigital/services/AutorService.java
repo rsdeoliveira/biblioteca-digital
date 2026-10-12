@@ -2,7 +2,9 @@ package br.com.bibliotecadigital.services;
 
 import br.com.bibliotecadigital.entities.Autor;
 import br.com.bibliotecadigital.repositories.AutorRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -16,22 +18,30 @@ public class AutorService {
     }
 
     public List<Autor> listarTodos() {
-        return autorRepository.listarTodos();
+        return autorRepository.findAll();
     }
 
-    public Autor buscarPorId(Long id) {
-        return autorRepository.buscarPorId(id);
+    public Autor buscarPorId(String id) {
+        return autorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado"));
     }
 
     public Autor salvar(Autor autor) {
-        return autorRepository.salvar(autor);
+        autor.setId(null);
+        return autorRepository.save(autor);
     }
 
     public Autor atualizar(Autor autor) {
-        return autorRepository.atualizar(autor);
+        if (!autorRepository.existsById(autor.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado");
+        }
+        return autorRepository.save(autor);
     }
 
-    public boolean deletar(Long id) {
-        return autorRepository.deletar(id);
+    public void deletar(String id) {
+        if (!autorRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado");
+        }
+        autorRepository.deleteById(id);
     }
 }

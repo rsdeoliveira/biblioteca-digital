@@ -1,0 +1,9 @@
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\BibliotecaDigitalApiApplication.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\controllers\AutorController.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\controllers\LivroController.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\entities\Autor.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\entities\Livro.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\repositories\AutorRepository.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\repositories\LivroRepository.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\services\AutorService.java
+C:\Users\roniv\Documents\projetos-dev\biblioteca-digital\backend\biblioteca-digital-api\src\main\java\br\com\bibliotecadigital\services\LivroService.java

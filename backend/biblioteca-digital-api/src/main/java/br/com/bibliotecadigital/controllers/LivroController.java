@@ -2,14 +2,14 @@ package br.com.bibliotecadigital.controllers;
 
 import br.com.bibliotecadigital.entities.Livro;
 import br.com.bibliotecadigital.services.LivroService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/livros")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://127.0.0.1:4200"})
 public class LivroController {
 
     private final LivroService livroService;
@@ -24,7 +24,7 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public Livro buscarPorId(@PathVariable Long id) {
+    public Livro buscarPorId(@PathVariable String id) {
         return livroService.buscarPorId(id);
     }
 
@@ -34,13 +34,14 @@ public class LivroController {
     }
 
     @PutMapping("/{id}")
-    public Livro atualizar(@PathVariable Long id, @RequestBody Livro livro) {
+    public Livro atualizar(@PathVariable String id, @RequestBody Livro livro) {
         livro.setId(id);
         return livroService.atualizar(livro);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable String id) {
         livroService.deletar(id);
     }
 }

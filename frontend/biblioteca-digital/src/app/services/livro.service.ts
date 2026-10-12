@@ -16,7 +16,7 @@ export class LivroService {
     return this.http.get<Livro[]>(this.apiUrl);
   }
 
-  buscarPorId(id: number): Observable<Livro> {
+  buscarPorId(id: string): Observable<Livro> {
     return this.http.get<Livro>(`${this.apiUrl}/${id}`);
   }
 
@@ -30,7 +30,7 @@ export class LivroService {
       livro
     );
   }
-  deletar(id: number): Observable<string> {
+  deletar(id: string): Observable<string> {
     // O endpoint responde sem corpo; texto evita erro de parsing JSON no HttpClient.
     return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
   }

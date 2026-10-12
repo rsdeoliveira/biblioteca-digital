@@ -1,8 +1,13 @@
 package br.com.bibliotecadigital.entities;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "livros")
 public class Livro {
 
-    private Long id;
+    @Id
+    private String id;
     private String titulo;
     private String autor;
     private Integer anoPublicacao;
@@ -11,7 +16,7 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(Long id, String titulo, String autor, Integer anoPublicacao, String isbn) {
+    public Livro(String id, String titulo, String autor, Integer anoPublicacao, String isbn) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
@@ -19,11 +24,11 @@ public class Livro {
         this.isbn = isbn;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

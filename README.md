@@ -33,6 +33,24 @@ A aplicação possui as seguintes operações para livros:
 - Maven
 - API REST
 
+## Executar a API com MongoDB Atlas
+
+No Atlas, copie a URI de conexão em **Connect → Drivers** e defina-a no
+PowerShell antes de iniciar o backend. Use o nome de usuário, senha e cluster
+do seu projeto:
+
+```powershell
+$env:MONGODB_URI = 'mongodb+srv://<usuario>:<senha>@<cluster>.mongodb.net/biblioteca-digital?retryWrites=true&w=majority'
+cd "backend\biblioteca-digital-api"
+.\mvnw spring-boot:run
+```
+
+Se necessário, defina `MONGODB_DATABASE` para escolher outro banco. Autorize
+o IP da máquina em **Network Access** no Atlas. A API grava livros e autores
+nas coleções `livros` e `autores`; os IDs são strings MongoDB geradas
+automaticamente. Não compartilhe nem versione a URI, pois ela contém
+credenciais.
+
 ## Estrutura do projeto
 
 O projeto é dividido em duas partes:
@@ -52,8 +70,8 @@ BibliotecaDigital/
 
 ## Entrega NoSQL (MongoDB)
 
-A entrega NoSQL utiliza as entidades `Livro` e `Autor` da fase 1 e
-contém exemplos de consultas realizadas no MongoDB Atlas.
+A entrega NoSQL utiliza as entidades `Livro` e `Autor` da fase 1 e contém
+exemplos de consultas para execução no MongoDB Atlas.
 
 O arquivo [`mongo/consultas.js`](mongo/consultas.js) contém as consultas
 solicitadas na atividade, incluindo `insertOne`, `insertMany`, `find`,
@@ -79,59 +97,9 @@ intervalos de valores.
 
 ### Execução
 
-As consultas são executadas no MongoDB Atlas utilizando o MongoDB Shell
-(`mongosh`).
+Com o MongoDB Shell (`mongosh`) instalado e `MONGODB_URI` definido como acima,
+execute as consultas a partir da raiz do repositório:
 
-Conecte-se ao cluster Atlas e execute o arquivo:
-
-powershell
-mongosh "mongodb+srv://cluster0.lposwj1.mongodb.net/" --apiVersion 1 --username usuariosDB ".\mongo\consultas.js"
-
-## Simulação de Conflito e Resolução no Git
-
-### Objetivo
-
-Simular um conflito entre duas branches durante o desenvolvimento
-e demonstrar o processo de identificação e resolução utilizando o Git.
-
-### Branches utilizadas
-
-- `main`
-- `desenvolvedor-a`
-- `desenvolvedor-b`
-
-### Conflito
-
-As branches `desenvolvedor-a` e `desenvolvedor-b` realizaram alterações
-diferentes no mesmo trecho do arquivo `README.md`.
-
-Ao tentar integrar a branch `desenvolvedor-b` à `main`, o Git identificou
-um conflito de conteúdo.
-
-### Resolução
-
-O conflito foi analisado e resolvido manualmente no arquivo `README.md`.
-Após a resolução, o arquivo foi adicionado ao staging e o merge foi
-finalizado com um commit.
-
-### Comandos utilizados
-
-bash
-git checkout -b desenvolvedor-a
-git checkout -b desenvolvedor-b
-git merge desenvolvedor-a
-git merge desenvolvedor-b
-git status
-git add README.md
-git commit -m "Resolve conflito entre desenvolvedor A e B"
-
-### Resultado
-
-O conflito foi resolvido com sucesso e as alterações das duas branches
-foram integradas à `main`.
-
-### Conclusão
-
-A atividade demonstrou na prática como o Git identifica conflitos
-quando diferentes branches modificam a mesma parte de um arquivo,
-bem como o processo de resolução e finalização do merge.
+```powershell
+mongosh $env:MONGODB_URI ".\mongo\consultas.js"
+```

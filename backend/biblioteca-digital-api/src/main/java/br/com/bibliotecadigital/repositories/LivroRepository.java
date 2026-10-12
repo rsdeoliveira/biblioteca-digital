@@ -1,47 +1,7 @@
 package br.com.bibliotecadigital.repositories;
 
 import br.com.bibliotecadigital.entities.Livro;
-import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public class LivroRepository {
-
-    private final List<Livro> livros = new ArrayList<>();
-    private Long proximoId = 1L;
-
-    public List<Livro> listarTodos() {
-        return livros;
-    }
-
-    public Livro buscarPorId(Long id) {
-        return livros.stream()
-                .filter(livro -> livro.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public Livro salvar(Livro livro) {
-        livro.setId(proximoId++);
-        livros.add(livro);
-        return livro;
-    }
-
-    public Livro atualizar(Livro livro) {
-        Livro livroExistente = buscarPorId(livro.getId());
-
-        if (livroExistente != null) {
-            livroExistente.setTitulo(livro.getTitulo());
-            livroExistente.setAutor(livro.getAutor());
-            livroExistente.setAnoPublicacao(livro.getAnoPublicacao());
-            livroExistente.setIsbn(livro.getIsbn());
-        }
-
-        return livroExistente;
-    }
-
-    public boolean deletar(Long id) {
-        return livros.removeIf(livro -> livro.getId().equals(id));
-    }
+public interface LivroRepository extends MongoRepository<Livro, String> {
 }
