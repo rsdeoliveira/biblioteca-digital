@@ -1,6 +1,6 @@
 # Biblioteca Digital
 
-Aplicação web para gestão de livros, desenvolvida em Angular no frontend e em Java com Spring Boot no backend. A ideia principal é permitir que o usuário visualize, cadastre, edite e exclua livros em uma interface simples, com os dados armazenados em MongoDB Atlas.
+Aplicação web para gestão de livros, desenvolvida em Angular no frontend e em Java com Spring Boot no backend. A ideia principal é permitir que o usuário visualize, cadastre, edite e exclua livros em uma interface simples, com os dados armazenados em uma instância local do MongoDB.
 
 ## Como o projeto funciona
 
@@ -9,7 +9,7 @@ O fluxo da aplicação é o seguinte:
 1. O usuário acessa a interface em Angular.
 2. A tela de livros consome a API REST do backend.
 3. O backend Spring Boot recebe as requisições HTTP e executa a lógica de negócio.
-4. Os dados são persistidos no MongoDB Atlas.
+4. Os dados são persistidos no MongoDB local.
 5. A resposta volta para o frontend e a interface é atualizada.
 
 Em resumo:
@@ -49,7 +49,7 @@ A aplicação permite realizar as operações básicas de um catálogo de livros
 
 ### Banco de dados
 
-- MongoDB Atlas
+- MongoDB Community Server (local)
 
 ## Estrutura do projeto
 
@@ -74,22 +74,25 @@ biblioteca-digital/
 
 ## Fluxo de execução do sistema
 
-### 1) Configurar o MongoDB Atlas
+### 1) Instalar e iniciar o MongoDB local
 
-Antes de iniciar a API, crie um cluster no MongoDB Atlas e obtenha a URI de conexão.
+Instale o MongoDB Community Server e o MongoDB Shell (`mongosh`) se ainda não estiverem instalados. A API está configurada para conectar por padrão em `mongodb://localhost:27017` e usar o banco `biblioteca-digital`.
 
-No PowerShell, configure a variável de ambiente com sua string de conexão:
+No Windows, inicie o serviço **MongoDB Server** pelo aplicativo Serviços ou, em um terminal como administrador, execute:
 
 ```powershell
-$env:MONGODB_URI = 'mongodb+srv://<usuario>:<senha>@<cluster>.mongodb.net/biblioteca-digital?retryWrites=true&w=majority'
+Start-Service MongoDB
 ```
 
-Dicas:
+Se instalou o MongoDB sem serviço do Windows, inicie o servidor manualmente (ajuste o caminho conforme sua instalação):
 
-- Use o banco de dados desejado na URI.
-- Autorize o IP da máquina em `Network Access` no Atlas.
-- Não compartilhe a URI no GitHub, pois ela contém credenciais.
-- A API utiliza as coleções `livros` e `autores`.
+```powershell
+ mongod --dbpath C:\data\db
+```
+
+Crie a pasta `C:\data\db` antes, caso ela não exista. Mantenha o terminal do `mongod` aberto enquanto usar a aplicação. Não é necessário configurar `MONGODB_URI` nem `MONGODB_DATABASE` para a configuração padrão. Se quiser substituir os valores padrão, configure essas variáveis no mesmo terminal em que iniciará a API.
+
+A API usa o banco `biblioteca-digital` e as coleções `livros` e `autores`. O MongoDB cria o banco e as coleções quando os primeiros documentos forem gravados.
 
 ### 2) Executar a API backend
 
@@ -146,7 +149,7 @@ Angular -> API REST -> MongoDB
 
 ## Entrega NoSQL (MongoDB)
 
-A entrega NoSQL utiliza as entidades `Livro` e `Autor` e contém exemplos de consultas para execução no MongoDB Atlas.
+A entrega NoSQL utiliza as entidades `Livro` e `Autor` e contém exemplos de consultas para execução no MongoDB local.
 
 O arquivo [`mongo/consultas.js`](mongo/consultas.js) reúne consultas com operações como:
 
@@ -159,10 +162,10 @@ O arquivo [`mongo/consultas.js`](mongo/consultas.js) reúne consultas com opera�
 
 ### Executar as consultas MongoDB
 
-Com o MongoDB Shell (`mongosh`) instalado e a variável `MONGODB_URI` já configurada:
+Com o MongoDB local em execução e o `mongosh` instalado, execute a partir da raiz do projeto:
 
 ```powershell
-mongosh $env:MONGODB_URI ".\mongo\consultas.js"
+mongosh "mongodb://localhost:27017/biblioteca-digital" ".\mongo\consultas.js"
 ```
 
 ## Screenshots
@@ -192,7 +195,7 @@ mongosh $env:MONGODB_URI ".\mongo\consultas.js"
   <img src="docs/images/cadastro-livro.png" alt="Formulário de cadastro preenchido com os dados do livro 1984" width="420">
 </div>
 
-### Dados no MongoDB Atlas
+### Dados no MongoDB
 
 <div align="center">
   <img src="docs/images/mongo-atlas.png" alt="Coleção de livros no MongoDB Atlas" width="420">
